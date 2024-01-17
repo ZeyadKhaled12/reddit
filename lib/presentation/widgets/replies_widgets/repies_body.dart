@@ -54,7 +54,7 @@ class _RepliesBodyState extends State<RepliesBody> {
           RepliesWidgetTextField(
             controller: controller,
             sendMessage: () {
-              if (controller.text.isEmpty) {
+              if (controller.text.isNotEmpty) {
                 setState(() {
                   replies.add(Reply(
                       user: widget.post.user,
@@ -63,11 +63,11 @@ class _RepliesBodyState extends State<RepliesBody> {
                       up: 0,
                       down: 0,
                       replies: const []));
-                  controller.clear();
                 });
                 context.read<PostBloc>().add(SendMessageEvent(
                     sendMessageParameters: SendMessageParameters(
                         post: widget.post, message: controller.text)));
+                controller.clear();
               }
             },
           ),
